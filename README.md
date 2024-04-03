@@ -1,6 +1,6 @@
  
 ## fshare
-Official Rust implementation of Command-line File-Sharing tool 🦀.
+**Official Rust implementation of Command-line File-Sharing tool** 🦀.
 
 [![MIT License](https://img.shields.io/github/license/dec0dOS/amazing-github-template.svg?style=flat-square)](https://github.com/ynwqmv/netprotocol/discussions/3)
 [![Version](https://img.shields.io/badge/version-1.0-red.svg)](https://github.com/ynwqmv/netplatform/blob/master/NETWORK.md)
