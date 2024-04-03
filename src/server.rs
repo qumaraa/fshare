@@ -1,0 +1,52 @@
+use std::path::PathBuf;
+use actix_web::{App, CustomizeResponder, HttpRequest, HttpResponse, HttpServer, Responder, web};
+use rand::Rng;
+#[derive(Clone,Debug)]
+pub enum Action {
+    Download { file_path: PathBuf },
+}
+
+pub async fn start(action: Action) -> std::io::Result<()> {
+    let mut rng = rand::thread_rng();
+    let port = rng.gen_range(49152..=65535);
+    let action_clone = web::Data::new(action.clone());
+    let srv = HttpServer::new({
+        move || {
+            let mut app = App::new()
+                .app_data(action_clone.clone());
+            match action.clone() {
+                Action::Download { file_path: _ } => {
+                    app = app.service(web::resource("/download").route(web::get().to(download)))
+                }
+            } app
+        }
+    }).bind(("0.0.0.0",port.clone()))
+        .unwrap()
+        .run();
+    println!("[*] Server is listening on 0.0.0.0:{}", port);
+    srv.await
+}
+
+
+pub async fn download(
+    req: HttpRequest,
+    action: web::Data<Action>,
+) -> CustomizeResponder<HttpResponse> {
+    let file_path = match &**action {
+        Action::Download { file_path } => file_path.clone(),
+        _ => {
+            panic!("file_path not found.");
+        },
+    };
+    let file_name = file_path.file_name().unwrap().to_str().unwrap();
+    println!("Sending file {:?}...", file_path);
+    let file = actix_files::NamedFile::open_async(&file_path)
+        .await
+        .unwrap();
+
+
+    file.into_response(&req).customize().insert_header((
+        "Content-Disposition",
+        format!("attachment; filename=\"{}\"", file_name),
+    ))
+}
