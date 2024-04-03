@@ -21,9 +21,13 @@ cargo run <command> <path>
  
 
 # ⚙️ About
-| Version | Features | 
-|---------------------|---------| 
-|     v1.0           |       |   
+| `fshare` version | Dependencies  | Version | 
+|---------------------|--------|---------| 
+|     `v1.0`           | `ActixWeb`     | `4.5.1`  |
+|                    | `qrcode` | `0.14.0`
+|            | `local-ip-address` | `0.6.1` | 
+|     |  `rand` | `0.8.5` |
+|   |  ` actix-files` | `0.6.5`  |
  
  ## Example
  ```sh
