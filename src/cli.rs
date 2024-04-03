@@ -2,6 +2,8 @@ use crate::server;
 use crate::server::Action;
 use std::env::args;
 use std::path::PathBuf;
+use crate::VERSION;
+
 
 pub async fn start() {
     let args: Vec<String> = args().collect();
@@ -25,6 +27,7 @@ pub async fn start() {
                     std::process::exit(1);
                 }
                 false => {
+                    println!("Version: {}",VERSION);
                     action = Action::Download {
                         file_path: path_buf,
                     };

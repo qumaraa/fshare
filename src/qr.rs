@@ -1,8 +1,7 @@
 use local_ip_address::local_ip;
 use qrcode::QrCode;
 use qrcode::render::unicode::Dense1x2;
-use crate::server;
-use crate::server::Action;
+use crate::server::{Action};
 
 fn get_endpoint(action: Action) -> &'static str {
     match action {
