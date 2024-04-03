@@ -31,6 +31,10 @@ cargo run <command> <path>
  
  ## Example
  ```sh
+cargo run send path/to/file
+```
+ 
+ ```sh
 Scan the qrcode: 
 
 █▀▀▀▀▀█ ▄██ ▀▄▀▄█▄ █▀ █▀▀▀▀▀█
