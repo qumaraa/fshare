@@ -19,7 +19,7 @@ pub async fn download(
         }
     };
     let file_name = file_path.file_name().unwrap().to_str().unwrap();
-    println!("Sending file {:?}...", file_path);
+    println!("Sending file {:?}... to {}", file_path,req.connection_info().host());
     let file = actix_files::NamedFile::open_async(&file_path)
         .await
         .unwrap();
