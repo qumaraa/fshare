@@ -29,6 +29,25 @@ cargo run <command> <path>
 |            | `local-ip-address` | `0.6.1` | 
 |     |  `rand` | `0.8.5` |
 |   |  ` actix-files` | `0.6.5`  |
+
+
+# Port Generation
+```rs
+let port = rng.gen_range(49152..=65535);
+```
+```rs
+let srv = HttpServer::new({
+       /**/
+    })
+    .bind(("0.0.0.0", port.clone())) /* <- binds to a local network with a randomly generated port */
+    .unwrap()
+    .run();
+
+    /*
+      Sometimes it may happen that the code can generate
+      a port that is used by the operating system or other programs, but it's not critical.
+    */
+```
  
  ## Example
  ```sh
