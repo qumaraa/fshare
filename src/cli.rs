@@ -20,18 +20,15 @@ pub async fn start() {
     match command.as_str() {
         "send" => {
             let path_buf = PathBuf::from(path);
-            // CH:1
-            match path_buf.is_dir() {
-                true => {
-                    eprintln!("Found directory, please select a file instead!");
-                    std::process::exit(1);
-                }
-                false => {
-                    println!("Version: {}",VERSION);
-                    action = Action::Download {
-                        file_path: path_buf,
-                    };
-                }
+            // CH:1.1
+            if path_buf.is_dir() && !path_buf.is_file() {
+                println!("Version: {}",VERSION);
+                action = Action::Download {
+                    file_path: path_buf,
+                };
+            }else {
+                eprintln!("Error: please select a file instead!");
+                std::process::exit(1);
             }
         }
         _ => {
