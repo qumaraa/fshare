@@ -16,7 +16,7 @@
 ```sh
 cargo run <command> <path>
 ```
-### Commands (v1.0)
+### Commands (v2.0)
 #### `send` - Sends the file to `web-server` for download.
 #### `recv` - Creates `web-server` and uses `HTML` for file-uploading.
     
