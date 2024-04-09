@@ -1,6 +1,7 @@
  
 ## fshare
 **Official Rust implementation of Command-line File-Sharing tool** 🦀.
+#### Send videos,photos,files(`.txt`,`.zip`and many more!)
 
 [![MIT License](https://img.shields.io/github/license/dec0dOS/amazing-github-template.svg?style=flat-square)](https://github.com/ynwqmv/netprotocol/discussions/3)
 [![Version](https://img.shields.io/badge/version-1.0-red.svg)](https://github.com/ynwqmv/netplatform/blob/master/NETWORK.md)
@@ -28,36 +29,28 @@ cargo run <command> <path>
 |            | `local-ip-address` | `0.6.1` | 
 |     |  `rand` | `0.8.5` |
 |   |  ` actix-files` | `0.6.5`  |
- 
- ## Example
- ```sh
-cargo run send path/to/file
+
+
+# Port Generation
+```rs
+let port = rng.gen_range(49152..=65535);
+```
+```rs
+let srv = HttpServer::new({
+       /**/
+    })
+    .bind(("0.0.0.0", port.clone())) /* <- binds to a local network with a randomly generated port */
+    .unwrap()
+    .run();
+
+    /*
+      Sometimes it may happen that the code can generate
+      a port that is used by the operating system or other programs, but it's not critical.
+    */
 ```
  
- ```sh
-Scan the qrcode: 
-
-█▀▀▀▀▀█ ▄██ ▀▄▀▄█▄ █▀ █▀▀▀▀▀█
-█ ███ █  █ ▀▀▄▀ █▀█▄▀ █ ███ █
-█ ▀▀▀ █ ▀▄▄▀▄▀█▄  ██▀ █ ▀▀▀ █
-▀▀▀▀▀▀▀ ▀ █▄█ ▀▄▀▄█ ▀ ▀▀▀▀▀▀▀
-▀▄▀▄█ ▀▄ ▄  █▄ █▄▄█▀  ▄▄▀▄ ▀▄
-▄▀▄▄▄█▀ █ ▀ ▄▄█▀ █▄ ▄███▀▄▀█▀
-█ █▄ █▀▀▄ ▄▄▀ ██ █▀   ██ █▄▀█
-▀█▄▀█▄▀▀ ▄  ▀▀   █▄▄▀▄  ▄▄ █▀
- ▄█▀▄█▀██▄█ ▄▄ █ ▄▀  ▄█▄  ▄▀█
-▀▄▄▄ ▀▀▄█▀█▄ ▄█▀ ▄█▄ █▄▄ █ █▀
-▀ ▀▀ ▀▀▀▄█ █▄ ██▄▄▀ █▀▀▀█ ▄▄▄
-█▀▀▀▀▀█  ██▀▄▀ █▄█▀██ ▀ ██ ▀▀
-█ ███ █ ▀▄▄██▄ █▄ █▄██▀▀██ ▀▀
-█ ▀▀▀ █ ▀█▄▄▀▄█▀ ▄██▄█  ▀█▀▄▀
-▀▀▀▀▀▀▀ ▀ ▀ ▀  ▀  ▀ ▀▀▀  ▀ ▀▀
-
-Or manually open the URL in browser http://192.168.1.107:56459/download
-[*] Server is listening on 0.0.0.0:56459
-Sending file "file"... to 192.168.1.107:56459
-```
- 
+ ## Example 🖥️
 
 ____
+![image](https://github.com/qumaraa/fshare/assets/112755279/064493d2-f4fd-4c67-b064-b9e301cb5b6a)
 
