@@ -24,7 +24,7 @@ pub async fn start() {
     let command = &args[1];
     let subcommand = &args[2];
 
-    match subcommand.as_str().to_uppercase().as_str() {
+    match subcommand.as_str() {
         "log_info" => {
             logger = tracing::Level::INFO;
         }
