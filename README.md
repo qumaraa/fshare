@@ -1,7 +1,7 @@
  
 ## fshare
 **Official Rust implementation of Command-line File-Sharing tool** 🦀.
-#### Send videos,photos,files(`.txt`,`.zip`and many more!)
+#### Available Send & Upload features!
 
 [![MIT License](https://img.shields.io/github/license/dec0dOS/amazing-github-template.svg?style=flat-square)](https://github.com/ynwqmv/netprotocol/discussions/3)
 [![Version](https://img.shields.io/badge/version-2.0-red.svg)](https://github.com/ynwqmv/netplatform/blob/master/NETWORK.md)
