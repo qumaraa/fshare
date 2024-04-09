@@ -21,7 +21,13 @@ cargo run <command> <path>
 #### `recv` - Creates `web-server` and uses `HTML` for file-uploading.
     
  
-
+# Logs
+#### `log_debug`  
+#### `log_info`
+#### `log_warn`  
+#### `log_err` 
+#### `log_trace`  
+#### `--` (log: off)
 
 # Port Generation
 ```rs
