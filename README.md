@@ -21,7 +21,7 @@ cargo run <command> <subcommand>
 #### `recv` - Creates `web-server` and uses `HTML` for file-uploading.
     
  
-# Logs
+# Logs 🖥️
 #### `log_debug`  
 #### `log_info`
 #### `log_warn`  
@@ -47,7 +47,7 @@ let srv = HttpServer::new({
     */
 ```
  
- ## Example 🖥️
+ ## Example 
 
 ____
 ![image](https://github.com/qumaraa/fshare/assets/112755279/31d3e17b-a0c7-44d4-94af-1c269f8847a5)
