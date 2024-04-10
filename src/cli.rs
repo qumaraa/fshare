@@ -9,19 +9,24 @@ use tracing::{debug, error, info, trace, warn, Level};
 use tracing_subscriber::FmtSubscriber;
 
 pub async fn start() {
+    // logger init default as Level::DEBUG
     let mut logger = tracing::Level::DEBUG;
-
+    // collects all command-line arguments
     let args: Vec<String> = args().collect();
+    // action init
     let mut action = Action::Download {
         file_path: PathBuf::new(),
     };
+    
     if args.len() < 3 {
         eprintln!("Usage: {} <command> <path>", &args[0]);
         eprintln!("Commands: send, recv");
         std::process::exit(1);
     }
-
+    // first argument after `exe`
+    // args[0] - `fshare.exe`
     let command = &args[1];
+    // second argument
     let subcommand = &args[2];
 
     match subcommand.as_str() {
@@ -42,15 +47,18 @@ pub async fn start() {
         }
         "--" => { /* NO FLAG [LOG_OFF] */ }
         _ => {
-            eprintln!("Unknown flag");
+            eprintln!("Unknown flag. Level::DEBUG set as default.");
+            
         }
     }
+    /* init tracing subscriber and set `logger` if subcommand != "--" */
+    /* otherwise tracing subscriber inits as Level::DEBUG             */
     if subcommand.as_str() != "--" {
         let subscriber = FmtSubscriber::builder().with_max_level(logger).finish();
         tracing::subscriber::set_global_default(subscriber)
             .expect("setting default subscriber failed");
     }
-
+    // matching commands (send,recv)
     match command.as_str() {
         "send" => {
             let path_buf = PathBuf::from(subcommand);
