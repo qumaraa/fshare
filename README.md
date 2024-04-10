@@ -1,5 +1,5 @@
  
-## fshare
+## fshare 📁
 **Official Rust implementation of Command-line File-Sharing tool** 🦀.
 #### Available Send & Upload features!
 
