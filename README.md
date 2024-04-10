@@ -14,7 +14,7 @@
 
 ## Run
 ```sh
-cargo run <command> <path>
+cargo run <command> <subcommand>
 ```
 ### Commands (v2.0)
 #### `send` - Sends the file to `web-server` for download.
