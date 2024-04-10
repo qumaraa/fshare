@@ -12,7 +12,7 @@
 
 
 
-## Run
+## Run 🏃
 ```sh
 cargo run <command> <subcommand>
 ```
