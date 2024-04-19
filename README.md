@@ -9,25 +9,14 @@
 ---
 
 
-
-
-
-## Run 🏃
-```sh
-cargo run <command> <subcommand>
-```
-### Commands (v2.0)
-#### `send` - Sends the file to `web-server` for download.
-#### `recv` - Creates `web-server` and uses `HTML` for file-uploading.
-    
  
 # Logs 🖥️
-#### `log_debug`  
+#### `log_debug` (set as default)
 #### `log_info`
 #### `log_warn`  
 #### `log_err` 
 #### `log_trace`  
-#### `--` (log: off)
+ 
 
 # Port Generation
 ```rs
