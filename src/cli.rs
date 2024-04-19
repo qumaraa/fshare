@@ -4,9 +4,47 @@ use crate::VERSION;
 use std::env::args;
 use std::path::PathBuf;
 use tracing;
-use tracing::log::__private_api::log;
-use tracing::{debug, error, info, trace, warn, Level};
+use tracing::{
+    debug,
+    error,
+    info,
+    trace,
+    warn,
+    Level
+};
 use tracing_subscriber::FmtSubscriber;
+use clap::{Arg, Parser, Subcommand};
+
+#[derive(Parser)]
+#[command(name="fshare",version="2.1",about,long_about=None)]
+struct Args {
+    #[command(subcommand)]
+    command: Commands,
+}
+#[derive(Subcommand)]
+enum Commands {
+    Send {
+        #[arg(short,long,help="Path of file for sending to server for downloading.")]
+        path: String,
+        #[arg(short,long,help="Choose log-level. Level::DEBUG set as default.")]
+        log: String,
+    },
+    Recv {
+        #[arg(short,long,help="Choose log-level. Level::DEBUG set as default.")]
+        log: String,
+    },
+}
+
+fn handle_log(log: String) -> tracing::Level {
+    match log.as_str() {
+        "log_info"  =>  tracing::Level::INFO ,
+        "log_debug" =>  tracing::Level::DEBUG,
+        "log_warn"  =>  tracing::Level::WARN ,
+        "log_trace" =>  tracing::Level::TRACE,
+        "log_err"   =>  tracing::Level::ERROR,
+        _           =>  tracing::Level::DEBUG,
+    }
+}
 
 pub async fn start() {
     // logger init default as Level::DEBUG
@@ -17,64 +55,26 @@ pub async fn start() {
     let mut action = Action::Download {
         file_path: PathBuf::new(),
     };
-    
-    if args.len() < 3 {
-        eprintln!("Usage: {} <command> <path>", &args[0]);
-        eprintln!("Commands: send, recv");
-        std::process::exit(1);
-    }
-    // first argument after `exe`
-    // args[0] - `fshare.exe`
-    let command = &args[1];
-    // second argument
-    let subcommand = &args[2];
+    let argz = Args::parse();
 
-    match subcommand.as_str() {
-        "log_info" => {
-            logger = tracing::Level::INFO;
-        }
-        "log_warn" => {
-            logger = tracing::Level::INFO;
-        }
-        "log_err" => {
-            logger = tracing::Level::ERROR;
-        }
-        "log_debug" => {
-            logger = tracing::Level::DEBUG;
-        }
-        "log_trace" => {
-            logger = tracing::Level::TRACE;
-        }
-        "--" => { /* NO FLAG [LOG_OFF] */ }
-        _ => {
-            eprintln!("Unknown flag. Level::DEBUG set as default.");
-            
-        }
-    }
-    /* init tracing subscriber and set `logger` if subcommand != "--" */
-    /* otherwise tracing subscriber inits as Level::DEBUG             */
-    if subcommand.as_str() != "--" {
-        let subscriber = FmtSubscriber::builder().with_max_level(logger).finish();
-        tracing::subscriber::set_global_default(subscriber)
-            .expect("setting default subscriber failed");
-    }
-    // matching commands (send,recv)
-    match command.as_str() {
-        "send" => {
-            let path_buf = PathBuf::from(subcommand);
+    match argz.command {
+        Commands::Send { path,log} => {
+            let f = handle_log(log);
+            logger = f;
+            let path_buf = PathBuf::from(path);
 
             if !path_buf.is_dir() && path_buf.is_file() {
                 action = Action::Download {
                     file_path: path_buf,
                 };
-                info!("version {}", VERSION);
             } else {
                 eprintln!("Found directory, please select a file instead!");
                 std::process::exit(1);
             }
         }
-
-        "recv" => {
+        Commands::Recv {log} => {
+            let f = handle_log(log);
+            logger = f;
             let fs = match tokio::fs::create_dir_all("uploads").await {
                 Ok(_) => {
                     info!("created dir '/uploads'");
@@ -85,11 +85,14 @@ pub async fn start() {
             };
             action = Action::Upload;
         }
-        _ => {
-            eprintln!("Usage: {} <command> <path>", &args[0]);
-            eprintln!("Commands: send, recv");
-            std::process::exit(1);
-        }
     }
+
+    let subscriber = FmtSubscriber::builder()
+        .with_max_level(logger)
+        .finish();
+    tracing::subscriber::set_global_default(subscriber)
+        .expect("setting default subscriber failed");
+
+    // start server with action (asynchronously)
     let _ = crate::server::start(action).await;
 }
