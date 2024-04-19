@@ -48,11 +48,40 @@ let srv = HttpServer::new({
 ```
  
  ## Example 
+```sh
+Usage: fshare <COMMAND>
 
+Commands:
+  send
+  recv
+  help  Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+```
+```sh
+fshare help send
+Usage: fshare send --path <PATH> --log <LOG>
+
+Options:
+  -p, --path <PATH>  Path of file for sending to server for downloading.
+  -l, --log <LOG>    Choose log-level. Level::DEBUG set as default.
+  -h, --help         Print help
+```
+```sh
+fshare help recv
+Usage: fshare recv --log <LOG>
+
+Options:
+  -l, --log <LOG>  Choose log-level. Level::DEBUG set as default.
+  -h, --help       Print help
+```
+```sh
+fshare --version
+fshare 2.1
+```
 ____
-![image](https://github.com/qumaraa/fshare/assets/112755279/31d3e17b-a0c7-44d4-94af-1c269f8847a5)
-![image](https://github.com/qumaraa/fshare/assets/112755279/e84737b8-191e-47c2-9eb9-a8ae75493dda)
-
 
 
 
