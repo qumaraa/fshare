@@ -48,7 +48,7 @@ let srv = HttpServer::new({
 ```
  
  ## Example 
-```sh
+```powershell
 Usage: fshare <COMMAND>
 
 Commands:
@@ -60,7 +60,7 @@ Options:
   -h, --help     Print help
   -V, --version  Print version
 ```
-```sh
+```powershell
 fshare help send
 Usage: fshare send --path <PATH> --log <LOG>
 
@@ -69,7 +69,7 @@ Options:
   -l, --log <LOG>    Choose log-level. Level::DEBUG set as default.
   -h, --help         Print help
 ```
-```sh
+```powershell
 fshare help recv
 Usage: fshare recv --log <LOG>
 
@@ -77,7 +77,7 @@ Options:
   -l, --log <LOG>  Choose log-level. Level::DEBUG set as default.
   -h, --help       Print help
 ```
-```sh
+```powershell
 fshare --version
 fshare 2.1
 ```
