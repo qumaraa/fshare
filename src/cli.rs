@@ -1,6 +1,5 @@
 use crate::server;
 use crate::server::Action;
-use crate::VERSION;
 use std::env::args;
 use std::path::PathBuf;
 use tracing;
