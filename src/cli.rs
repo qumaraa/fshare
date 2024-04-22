@@ -61,7 +61,7 @@ pub async fn start() {
             let f = handle_log(log);
             logger = f;
             let path_buf = PathBuf::from(path);
-
+            // or just "if path_buf.is_file() {...}, unnecessary statement:)
             if !path_buf.is_dir() && path_buf.is_file() {
                 action = Action::Download {
                     file_path: path_buf,
