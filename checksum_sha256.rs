@@ -38,7 +38,7 @@ fn main() {
 
     match calculate_hash(&file_path) {
         Ok(hash) => {
-            println!("Hashsum of {}: {}",
+            println!("Checksum of {}: {}",
                      file_path,
                      hash
             );
