@@ -8,7 +8,7 @@ fn main() {
     let mut file_path = String::new();
     let mut input_hashsum = String::new();
 
-    println!("Enter your hashsum: ");
+    println!("Enter your checksum: ");
 
     match stdin().read_line(&mut input_hashsum) {
         Ok(bytes) => {
@@ -22,7 +22,7 @@ fn main() {
             )},
     }
 
-    println!("Enter file path for checking hashsum: ");
+    println!("Enter file path for checking checksum: ");
     match stdin().read_line(&mut file_path) {
         Ok(bytes) => {
             println!("Ok. bytes entered = {}", bytes);
@@ -42,17 +42,17 @@ fn main() {
                      file_path,
                      hash
             );
-            let check = check_hashsum(&input_hashsum
+            let check = check_sum(&input_hashsum
                 .trim()
                 .to_string(),
                  &hash
             );
-            println!("Is hashsum of {} correct: {}",
+            println!("Is checksum of {} correct: {}",
                      file_path,
                      check
             );
         },
-        Err(err) => {println!("Error: {}", 
+        Err(err) => {println!("Error: {}",
                         err
         )},
     }
@@ -66,11 +66,11 @@ fn calculate_hash(file_path: &str) -> io::Result<String> {
 
     let mut hasher = Sha256::new();
     hasher.input(&buffer);
-
+    println!("Read bytes {} from file. Ok.", buffer.len());
     Ok(hasher.result_str())
 }
 
-fn check_hashsum(input_hash: &String, output_hash: &String) -> bool {
+fn check_sum(input_hash: &String, output_hash: &String) -> bool {
     if *input_hash != *output_hash {
         return false;
     }
