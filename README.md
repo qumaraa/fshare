@@ -1,6 +1,6 @@
  
 ## fshare 2.1 (Latest) 📁
-**Official Rust implementation of Command-line File-Sharing tool** 🦀.
+**Official Rust implementation of Command-line File-Sharing tool** [NON-PROD / BETA] 🦀.
 #### Available Send & Upload features!
 
 [![MIT License](https://img.shields.io/github/license/dec0dOS/amazing-github-template.svg?style=flat-square)](https://github.com/ynwqmv/netprotocol/discussions/3)
